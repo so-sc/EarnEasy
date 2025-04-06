@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { googleAuth } from "../apiFetch";
 
 const GoogleLogin = () => {
 	const [user, setUser] = useState(null);
@@ -10,15 +10,15 @@ const GoogleLogin = () => {
 	const responseGoogle = async (authResult) => {
 		try {
 			if (authResult["code"]) {
-				const result = await axios.get(`http://localhost:3000/auth/google?code=${authResult.code}`);
-
-				const { email, name, image } = result.data.user;
+				const result = await googleAuth(authResult.code); //Fetch the user data from the backend using the code received from Google
+				const { email, name, picture } = result.data.user;
+				console.log("Google Auth User result: ", result.data.user);
+				
 				const token = result.data.token;
-				const obj = { email, name, token, image };
-
+				const obj = { email, name, token, picture };
 				localStorage.setItem("user-info", JSON.stringify(obj));
 				navigate("/dashboard");
-			} else {
+			  } else {
 				console.log("Google Auth failed", authResult);
 				throw new Error(authResult);
 			}
