@@ -14,9 +14,9 @@ const ErrorPage = () => {
                 <div className="flex justify-center mt-4">
                     <button className="bg-black rounded-md text-white cursor-pointer text-center p-4"
                         onClick={() => {
-                            navigate('/dashboard')
+                            navigate('/')
                         }}>
-                        Go to Dashboard
+                        Go to Home
                     </button>
                 </div>
             </div>
