@@ -6,7 +6,7 @@ import LandingPage from './components/LandingPage'
 import ErrorPage from './components/ErrorPage'
 
 function App() {
-
+  
   return (
     <BrowserRouter>
       <Routes>
