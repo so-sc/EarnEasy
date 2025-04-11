@@ -3,49 +3,67 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreIcon from '@mui/icons-material/Explore';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useNavigate, useLocation } from 'react-router-dom';
+import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 
-export default function LabelBottomNavigation() {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const [value, setValue] = React.useState(location.pathname);
+export default function BottomNavbar() {
+  const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-        navigate(newValue); // navigate to the selected route
-    };
+  return (
+    <Paper
+      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+      elevation={3}
+    >
+      <Box sx={{ position: 'relative' }}>
+        {/* Floating Plus Icon */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: -30, // lifts the icon out of the navbar
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            bgcolor: 'white',
+            borderRadius: '50%',
+          }}
+        >
+          <AddCircleRoundedIcon sx={{ fontSize: 60, color: '#2596be' }} />
+        </Box>
 
-    return (
-        <div className="fixed left-1/2 -translate-x-1/2 bottom-0 z-50 rounded-xl sm:bottom-5 max-w-screen">
-            <BottomNavigation
-                sx={{ width: 500 }}
-                value={value}
-                onChange={handleChange}
-                showLabels
-            >
-                <BottomNavigationAction
-                    label="Home"
-                    value="/home"
-                    icon={<HomeIcon />}
-                />
-                <BottomNavigationAction
-                    label="Explore"
-                    value="/explore"
-                    icon={<ExploreIcon />}
-                />
-                <BottomNavigationAction
-                    label="Cart"
-                    value="/cart"
-                    icon={<ShoppingCartIcon />}
-                />
-                <BottomNavigationAction
-                    label="Profile"
-                    value="/profile"
-                    icon={<AccountCircleIcon />}
-                />
-            </BottomNavigation>
-        </div>
-    );
+        {/* Actual Nav Items */}
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction
+           label="Home"
+           icon={<HomeIcon/>}
+           />
+          <BottomNavigationAction 
+           label="Explore" 
+           icon={<ExploreIcon />} 
+           />
+          <BottomNavigationAction 
+          label="" 
+          icon={<FavoriteIcon />} 
+          />
+          <BottomNavigationAction 
+          label="Cart" 
+          icon={<ShoppingCartSharpIcon />} 
+          />
+          <BottomNavigationAction 
+          label="Profile" 
+          icon={<AccountCircleSharpIcon />} 
+          />
+        </BottomNavigation>
+      </Box>
+    </Paper>
+  );
 }
