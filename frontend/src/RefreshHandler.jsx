@@ -13,7 +13,7 @@ function RefreshHandler({ setIsAuthenticated }) {
             if (location.pathname === '/' ||
                 location.pathname === '/auth'
             ) {
-                navigate('/dashboard', { replace: true }); // { replace: true } - does not add a new entry to the browser history stack 
+                navigate('/home', { replace: true }); // { replace: true } - does not add a new entry to the browser history stack 
             }
         }
     }, [location, navigate, setIsAuthenticated])
