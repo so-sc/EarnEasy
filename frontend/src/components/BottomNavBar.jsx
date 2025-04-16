@@ -15,7 +15,7 @@ export default function BottomNavbar() {
 
   return (
     <Paper
-      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1300}}
       elevation={3}
     >
       <Box sx={{ position: 'relative' }}>
@@ -26,7 +26,7 @@ export default function BottomNavbar() {
             top: -30, // lifts the icon out of the navbar
             left: '50%',
             transform: 'translateX(-50%)',
-            zIndex: 10,
+            zIndex: 1300,
             bgcolor: 'white',
             borderRadius: '50%',
           }}
