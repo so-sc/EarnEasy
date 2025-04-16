@@ -17,7 +17,7 @@ const GoogleLogin = () => {
 				const token = result.data.token;
 				const obj = { email, name, token, picture };
 				localStorage.setItem("user-info", JSON.stringify(obj));
-				navigate("/dashboard");
+				navigate("/home");
 			} else {
 				console.log("Google Auth failed", authResult);
 				throw new Error(authResult);

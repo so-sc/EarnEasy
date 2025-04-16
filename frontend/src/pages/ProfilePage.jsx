@@ -32,13 +32,6 @@ const ProfilePage = ({ mode, setMode }) => {
             <Button variant="contained" onClick={toggleTheme}>
                 Toggle to {mode === 'light' ? 'Dark' : 'Light'} Mode
             </Button>
-
-            <Button variant="contained"
-                className="cursor-pointer bg-black text-white px-4 py-2 rounded"
-                onClick={() => navigate('/auth')}
-            >
-                Sign In
-            </Button>
             <Button variant="contained"
                 className="bg-black rounded-md text-white cursor-pointer text-center p-4"
                 onClick={handleLogout}
