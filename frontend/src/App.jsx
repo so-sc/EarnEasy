@@ -7,8 +7,9 @@ import HomePage from "./pages/HomePage.jsx";
 import ErrorPage from './pages/ErrorPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import CartPage from "./pages/CartPage.jsx";
-import RefreshHandler from './RefreshHandler';
+import RefreshHandler from './utils/RefreshHandler.jsx';
 import BottomNavBar from './components/BottomNavBar.jsx';
+import PrivateRoute from './utils/PrivateRoute';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -40,11 +41,15 @@ const AppContent = ({ isAuthenticated, setIsAuthenticated, mode, setMode }) => {
             <RefreshHandler setIsAuthenticated={setIsAuthenticated} />
             <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/auth" element={<GoogleLogin />} />
-                <Route path="/explore" element={<ExplorePage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/profile" element={<ProfilePage mode={mode} setMode={setMode} />} />
+                <Route path="/auth" element={<GoogleLogin setIsAuthenticated={setIsAuthenticated} />} />
+                
+                <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/explore" element={<ExplorePage />} />
+                    <Route path="/cart" element={<CartPage />} />
+                    <Route path="/profile" element={<ProfilePage mode={mode} setMode={setMode} />} />
+                </Route>
+                
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
             {location.pathname !== '/auth' && location.pathname !== "/" && <BottomNavBar />}
