@@ -1,6 +1,7 @@
 import { Button, Card, CardMedia, CardContent, Typography, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import CategoriesBar from "../components/CategoriesBar";
+import PressableProductCard from '../components/PressableProductCard';
 
 const myChoices = [
   { name: "Power Bank", price: "₹50 per/Hr", desc: "Realme 10000mAh", img: "/images/powerbank.jpeg" },
@@ -53,39 +54,7 @@ const HomePage = () => {
         <h2 className="text-lg font-bold mb-3 text-teal-600">My Choice</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
           {myChoices.map((item, i) => (
-              <Card
-                  key={i}
-                  sx={{
-                    borderRadius: 3,
-                    boxShadow: 3,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease-in-out',
-                    '&:hover': {
-                      boxShadow: 6,
-                      transform: 'scale(1.02)',
-                      borderColor: 'primary.main',
-                    },
-                    '&:active': {
-                      transform: 'scale(0.98)',
-                    },
-                  }}
-                  onClick={() => console.log(`${item.name} clicked`)}
-              >
-                <CardMedia
-                    component="img"
-                    image={item.img}
-                    alt={item.name}
-                    sx={{
-                      width: '100%',
-                      objectFit: 'cover',
-                      aspectRatio: '4 / 3', // Maintains a fluid aspect ratio (adjustable based on image preference)
-                    }}
-                />
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary" fontWeight="bold">{item.desc}</Typography>
-                  <Typography variant="h5" color="teal">{item.price}</Typography>
-                </CardContent>
-              </Card>
+            <PressableProductCard key={i} item={item} />
           ))}
         </div>
 
@@ -93,39 +62,7 @@ const HomePage = () => {
         <h2 className="text-lg font-bold mb-3 text-teal-600">New one</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {newItems.map((item, i) => (
-              <Card
-                  key={i}
-                  sx={{
-                    borderRadius: 3,
-                    boxShadow: 3,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease-in-out',
-                    '&:hover': {
-                      boxShadow: 6,
-                      transform: 'scale(1.02)',
-                      borderColor: 'primary.main',
-                    },
-                    '&:active': {
-                      transform: 'scale(0.98)',
-                    },
-                  }}
-                  onClick={() => console.log(`${item.name} clicked`)}
-              >
-                <CardMedia
-                    component="img"
-                    image={item.img}
-                    alt={item.name}
-                    sx={{
-                      width: '100%',
-                      objectFit: 'cover',
-                      aspectRatio: '3 / 2', // Slightly different aspect ratio for variety, adjustable
-                    }}
-                />
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary" fontWeight="bold">{item.desc}</Typography>
-                  <Typography variant="h5" color="teal">{item.price}</Typography>
-                </CardContent>
-              </Card>
+            <PressableProductCard key={i} item={item} />
           ))}
         </div>
       </div>
