@@ -24,7 +24,7 @@ export default function BottomNavbar() {
                 navigate('/explore');
                 break;
             case 2:
-                navigate('/favorites');
+                navigate('/add');
                 break;
             case 3:
                 navigate('/cart');
@@ -42,7 +42,7 @@ export default function BottomNavbar() {
             <Box sx={{ position: 'relative' }}>
                 {/* Floating Plus Icon */}
                 <Box
-                    onClick={() => navigate('/favorites')}
+                    onClick={() => navigate('/add')}
                     sx={{
                         position: 'absolute',
                         top: -30,
