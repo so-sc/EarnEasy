@@ -42,14 +42,13 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import CartPage from "./pages/CartPage.jsx";
 import AddPage from "./pages/AddPage.jsx";
-import RefreshHandler from './utils/RefreshHandler.jsx';
+// import RefreshHandler from './utils/RefreshHandler.jsx';
 import BottomNavBar from './components/BottomNavBar.jsx';
-import PrivateRoute from './utils/PrivateRoute';
+// import PrivateRoute from './utils/PrivateRoute';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { indigo } from '@mui/material/colors';
-
 const getTheme = (mode) =>
     createTheme({
         palette: {
@@ -77,11 +76,12 @@ const AppContent = ({ isAuthenticated, setIsAuthenticated, mode, setMode }) => {
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/auth" element={<GoogleLogin setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/add" element={<AddPage />} />
 
                 <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/explore" element={<ExplorePage />} />
-                    <Route path="/add" element={<AddPage />} />
+
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/profile" element={<ProfilePage mode={mode} setMode={setMode} />} />
                 </Route>
@@ -93,27 +93,29 @@ const AppContent = ({ isAuthenticated, setIsAuthenticated, mode, setMode }) => {
     );
 };
 
-const App = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [mode, setMode] = useState(() => localStorage.getItem('themeMode') || 'light');
+export default AppContent;
 
-    useEffect(() => {
-        localStorage.setItem('themeMode', mode);
-    }, [mode]);
+// const App = () => {
+//     const [isAuthenticated, setIsAuthenticated] = useState(false);
+//     const [mode, setMode] = useState(() => localStorage.getItem('themeMode') || 'light');
 
-    return (
-        <BrowserRouter>
-            <AppContent
-                isAuthenticated={isAuthenticated}
-                setIsAuthenticated={setIsAuthenticated}
-                mode={mode}
-                setMode={setMode}
-            />
-        </BrowserRouter>
-    );
-};
+//     useEffect(() => {
+//         localStorage.setItem('themeMode', mode);
+//     }, [mode]);
 
-export default App;
+//     return (
+//         <BrowserRouter>
+//             <AppContent
+//                 isAuthenticated={isAuthenticated}
+//                 setIsAuthenticated={setIsAuthenticated}
+//                 mode={mode}
+//                 setMode={setMode}
+//             />
+//         </BrowserRouter>
+//     );
+// };
+
+// export default App;
 
 // If you want to disable /auth temporarily for testing, un-comment below code and comment above code, and at pr reverse the changes
 // import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
