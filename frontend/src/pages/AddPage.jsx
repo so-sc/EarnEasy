@@ -238,9 +238,21 @@ const AddPage = () => {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mt: 2, backgroundColor: '#00bcd4' }}
+          sx={{ 
+            mt: 2,
+            mb: 4, // Add bottom margin
+            backgroundColor: '#00bcd4',
+            color: 'white', // Ensure text is visible
+            fontSize: '1.1rem',
+            padding: '10px',
+            '&:hover': {
+              backgroundColor: '#0097a7' // Darker shade for hover
+            },
+            position: 'relative', // Ensure button is positioned in normal flow
+            zIndex: 10 // Ensure button appears above other elements
+          }}
           onClick={handleSubmit}
-          disabled={images.length === 0}  // Disables submit if no photos are uploaded
+          disabled={images.length === 0}
         >
           Done
         </Button>
