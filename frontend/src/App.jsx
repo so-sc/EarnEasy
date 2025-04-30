@@ -92,11 +92,11 @@ export default App;
 // import CartPage from "./pages/CartPage.jsx";
 // import AddPage from "./pages/AddPage.jsx";
 // import BottomNavBar from './components/BottomNavBar.jsx';
-//
+
 // import { ThemeProvider, createTheme } from '@mui/material/styles';
 // import CssBaseline from '@mui/material/CssBaseline';
 // import { indigo } from '@mui/material/colors';
-//
+
 // const getTheme = (mode) =>
 //     createTheme({
 //         palette: {
@@ -111,38 +111,38 @@ export default App;
 //             },
 //         },
 //     });
-//
+
 // // To fix authentication and /auth
 // const AppContent = ({  mode, setMode }) => {
 //     const location = useLocation();
 //     const theme = getTheme(mode);
-//
+
 //     return (
 //         <ThemeProvider theme={theme}>
 //             <CssBaseline />
 //             <Routes>
 //                 <Route path="/" element={<LandingPage />} />
-//
+
 //                 <Route path="/home" element={<HomePage />} />
 //                 <Route path="/explore" element={<ExplorePage />} />
 //                 <Route path="/add" element={<AddPage />} />
 //                 <Route path="/cart" element={<CartPage />} />
 //                 <Route path="/profile" element={<ProfilePage mode={mode} setMode={setMode} />} />
-//
+
 //                 <Route path="*" element={<ErrorPage />} />
 //             </Routes>
 //             {location.pathname !== '/auth' && location.pathname !== "/" && <BottomNavBar />}
 //         </ThemeProvider>
 //     );
 // };
-//
+
 // const App = () => {
 //     const [mode, setMode] = useState(() => localStorage.getItem('themeMode') || 'light');
-//
+
 //     useEffect(() => {
 //         localStorage.setItem('themeMode', mode);
 //     }, [mode]);
-//
+
 //     return (
 //         <BrowserRouter>
 //             <AppContent
@@ -152,5 +152,5 @@ export default App;
 //         </BrowserRouter>
 //     );
 // };
-//
+
 // export default App;
