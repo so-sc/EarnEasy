@@ -54,22 +54,46 @@ const Foods = [
 ];
 
 const FoodPage = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredItems = Foods.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="p-4">
-      <div className="heading flex justify-center">
-        <h1 className="text-blue-400 mt-2 ml-4 text-3xl font-bold">Food</h1>
+    
+      <div className="flex justify-center mb-4">
+        <h1 className="text-blue-400 text-3xl font-bold">Food</h1>
       </div>
 
-      <div className="products grid grid-cols-2 gap-6 mt-8 sm:grid-cols-3 lg:grid-cols-5">
-        {Foods.map((prod, index) => (
-          <div className="w-48 mx-auto" key={index}>
-            <ProductCard prod={prod} index={index}/>
-          </div>
-        ))}
+     
+      <div className="flex justify-center mb-8">
+        <input
+          type="text"
+          placeholder="Search items..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-200"
+        />
+      </div>
+
+     
+      <div className="products grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+        {filteredItems.length > 0 ? (
+          filteredItems.map((prod, index) => (
+            <div className="w-48 mx-auto" key={index}>
+              <ProductCard prod={prod} index={index} />
+            </div>
+          ))
+        ) : (
+          <p className="col-span-full text-center text-gray-500">
+            No products found.
+          </p>
+        )}
       </div>
     </div>
   );
 };
 
 export default FoodPage;
-
