@@ -38,7 +38,7 @@ const LandingPage = () => {
     // ];
 
     return (
-        <Box sx={{ bgcolor: "#fff", fontFamily: "'Poppins',sans-serif", color: "black" }}>
+        <Box sx={{ bgcolor: "#fff", fontFamily: "'Inter',sans-serif", color: "black" }}>
             {/* Header */}
             <Box sx={{
                 background: "linear-gradient(to bottom,#7affff,#ffffff)",
@@ -51,7 +51,7 @@ const LandingPage = () => {
                         fontWeight="bold"
                         textAlign="center"
                         mb={4}
-                        sx={{ fontFamily: "'Playfair Display',serif" }}
+                        sx={{ fontFamily: "'Inter',serif" }}
                     >
                         Earn Easy
                     </Typography>
@@ -92,7 +92,7 @@ const LandingPage = () => {
                     fontWeight="bold"
                     textAlign="center"
                     mb={4}
-                    sx={{ fontFamily: "'Playfair Display',serif" }}
+                    sx={{ fontFamily: "'Inter',serif" }}
                 >
                     How It Works...
                 </Typography>
