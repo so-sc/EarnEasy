@@ -76,9 +76,13 @@ const PressableProductCard = ({ item }) => {
           <Typography variant="body2" color="text.secondary" fontWeight="bold">
             {item.desc}
           </Typography>
-          <Typography variant="h5" color="teal">
-            {item.price}
-          </Typography>
+         <Typography variant="h5" color="teal">
+         {new Intl.NumberFormat('en-IN', {
+          style: 'currency',
+          currency: 'INR',
+          }).format(item.price)}
+         </Typography>
+
         </CardContent>
       </Card>
 

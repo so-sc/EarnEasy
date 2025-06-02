@@ -1,5 +1,6 @@
 import express from 'express';
 import authRouter from './routes/authRouter.js';
+import productRouter from './routes/productRoutes.js';
 import './models/dbConnections.js'
 import cors from 'cors';
 import 'dotenv/config'; 
@@ -15,6 +16,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authRouter);
+app.use('/products', productRouter);
+app.use(express.json());
 
 //TODOs
 //In /routes folder define all the routes in  file
@@ -24,5 +27,5 @@ app.use('/auth', authRouter);
 //eg app.use('/reviews', reviewRouter)
 
 app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+  console.log('Server is running on port 3000');
 });
