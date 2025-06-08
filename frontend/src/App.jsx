@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { SessionProvider } from './context/SessionContext';
 import GoogleLogin from './components/GoogleLogin';
+import SessionInfo from './components/SessionInfo';
 import LandingPage from './pages/LandingPage.jsx';
 import ExplorePage from "./pages/ExplorePage.jsx";
 import HomePage from "./pages/HomePage.jsx";
@@ -33,26 +35,20 @@ const getTheme = (mode) =>
 // To fix authentication and /auth
 const AppContent = ({ isAuthenticated, setIsAuthenticated, mode, setMode }) => {
     const location = useLocation();
-    const theme = getTheme(mode);
-
-    return (
+    const theme = getTheme(mode);    return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <RefreshHandler setIsAuthenticated={setIsAuthenticated} />
-            <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/auth" element={<GoogleLogin setIsAuthenticated={setIsAuthenticated} />} />
+            <SessionInfo />
+            <RefreshHandler setIsAuthenticated={setIsAuthenticated} />            <Routes>
+                <Route path="/" element={<LandingPage />} />                <Route path="/auth" element={<GoogleLogin setIsAuthenticated={setIsAuthenticated} />} />
                 <Route path="/add" element={<AddPage />} />
 
                 <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/explore" element={<ExplorePage />} />
-
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/profile" element={<ProfilePage mode={mode} setMode={setMode} />} />
-                </Route>
-
-                <Route path="*" element={<ErrorPage />} />
+                </Route>                <Route path="*" element={<ErrorPage />} />
             </Routes>
             {location.pathname !== '/auth' && location.pathname !== "/" && <BottomNavBar />}
         </ThemeProvider>
@@ -68,14 +64,16 @@ const App = () => {
     }, [mode]);
 
     return (
-        <BrowserRouter>
-            <AppContent
-                isAuthenticated={isAuthenticated}
-                setIsAuthenticated={setIsAuthenticated}
-                mode={mode}
-                setMode={setMode}
-            />
-        </BrowserRouter>
+        <SessionProvider>
+            <BrowserRouter>
+                <AppContent
+                    isAuthenticated={isAuthenticated}
+                    setIsAuthenticated={setIsAuthenticated}
+                    mode={mode}
+                    setMode={setMode}
+                />
+            </BrowserRouter>
+        </SessionProvider>
     );
 };
 

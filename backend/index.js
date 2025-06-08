@@ -1,9 +1,10 @@
 import express from 'express';
 import authRouter from './routes/authRouter.js';
 import productRouter from './routes/productRoutes.js';
+import sessionRouter from './routes/sessionRoutes.js';
 import './models/dbConnections.js'
 import cors from 'cors';
-import 'dotenv/config'; 
+import 'dotenv/config';
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authRouter);
+app.use('/session', sessionRouter);
 app.use('/products', productRouter);
 app.use(express.json());
 
