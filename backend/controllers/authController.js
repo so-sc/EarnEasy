@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/authModel.js';
 import oauth2Client from '../utils/googleClient.js';
-import { generateToken } from '../middleware/authMiddleware.js';
+import { generateRefreshToken } from '../middleware/authMiddleware.js';
 import 'dotenv/config';
 
 export const googleAuth = async (req, res) => {
@@ -33,7 +33,7 @@ export const googleAuth = async (req, res) => {
         }        const { _id } = user; //destructuring the id from the user object
 
         //Creating JWT token using the middleware function
-        const token = generateToken(_id, email);
+        const token = generateRefreshToken({ userId: _id, email });
 
         //Sendin the response back to the frontend
         res.status(200).json({
