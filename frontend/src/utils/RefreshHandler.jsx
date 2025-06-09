@@ -1,9 +1,23 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSession } from '../context/SessionContext';
 
 function RefreshHandler({ setIsAuthenticated }) {
     const location = useLocation();
     const navigate = useNavigate();
+    const { user, loading } = useSession();
+
+    useEffect(() => {
+        if (!loading) {
+            if (user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+        }
+    }, [user, loading, setIsAuthenticated]);
+
+    // ...existing code...
 
     useEffect(() => {
         const data = localStorage.getItem('user-info');

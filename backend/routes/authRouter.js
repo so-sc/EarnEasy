@@ -4,11 +4,11 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     res.json({
-        message: 'Router Testing!'
+        message: 'Auth Router Testing!'
     })
 })
 
-router.get('/google',googleAuth); // googleAuth From controllers
+router.get('/google',googleAuth);
 
 export default router;
 

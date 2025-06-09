@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom'; // <-- add this
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'; // Add this import
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
@@ -12,7 +13,8 @@ import Box from '@mui/material/Box';
 
 export default function BottomNavbar() {
     const [value, setValue] = React.useState(0);
-    const navigate = useNavigate(); // <-- add this
+    const navigate = useNavigate();
+    const location = useLocation(); // Add this hook
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -51,6 +53,7 @@ export default function BottomNavbar() {
                         zIndex: 1300,
                         bgcolor: 'white',
                         borderRadius: '50%',
+                        display: location.pathname === '/add' ? 'none' : 'block' // Add this line
                     }}
                 >
                     <AddCircleRoundedIcon sx={{ fontSize: 60, color: '#2596be' }} />
