@@ -16,6 +16,8 @@ app.get('/', (req, res) => {
     });
 });
 
+
+
 app.use('/auth', authRouter);
 app.use('/session', sessionRouter);
 app.use('/products', productRouter);
