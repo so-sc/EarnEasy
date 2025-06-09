@@ -12,15 +12,15 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^7.0.2",
-    "@mui/material": "^7.0.2",
-    "@react-oauth/google": "^0.12.1",
+    "@mui/icons-material": "^7.1.1",
+    "@mui/material": "^7.1.1",
+    "@react-oauth/google": "^0.12.2",
     "@tailwindcss/vite": "^4.1.1",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.5.0",
+    "react-router-dom": "^7.6.2",
     "tailwindcss": "^4.1.1"
   },
   "devDependencies": {
