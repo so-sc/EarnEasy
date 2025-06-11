@@ -11,10 +11,13 @@ const getAllProducts = async (req, res) => {
 };
 
 // POST a new product
-const createProduct = async (req, res) => {
+const createProduct = async (req,res) => {
   try {
+    console.log('Received request body:', req.body);
     const { name, price, desc, img } = req.body;
+    
     if (!name || !price || !desc || !img) {
+       console.log('Missing fields:', { name, price, desc, img });
       return res.status(400).json({ error: 'All fields (name, price, desc, img) are required' });
     }
     const newProduct = new Product({ name, price, desc, img });
