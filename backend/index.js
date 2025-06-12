@@ -10,16 +10,20 @@ import 'dotenv/config';
 const app = express();
 app.use(cors());
 
+
+app.use(express.json());
 app.get('/', (req, res) => {
     res.json({
         message: 'Hello from the backend!'
     });
 });
 
+
+
 app.use('/auth', authRouter);
 app.use('/session', sessionRouter);
 app.use('/products', productRouter);
-app.use(express.json());
+
 
 //TODOs
 //In /routes folder define all the routes in  file

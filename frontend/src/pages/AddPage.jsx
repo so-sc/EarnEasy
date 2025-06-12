@@ -73,15 +73,42 @@ const AddPage = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit =async () => {
     if (!validateForm()) {
       alert('Please fix the errors in the form.');
       return;
     }
-    console.log('Form Submitted:', form);
-    console.log('Uploaded Images:', images);
-    alert('Form submitted successfully! Check console.');
-    resetForm();
+
+    // Prepare data to send to the backend
+    const productData = {
+      name: form.productName,
+      price: parseFloat(form.amount), // Ensure price is a number
+      desc: `${form.features} - ${form.rentSell}`, // Combine features and rent/sell for description
+      img: images[0], // Send the URL of the main image
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/products', { // Corrected endpoint
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create product');
+      }
+
+      const newProduct = await response.json();
+      console.log('Product Added:', newProduct);
+      alert('Product added successfully!');
+      resetForm();
+    } catch (error) {
+      console.error('Error adding product:', error);
+      alert(`Error adding product: ${error.message}`);
+    }
   };
 
   const resetForm = () => {
