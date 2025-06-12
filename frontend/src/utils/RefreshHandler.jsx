@@ -17,7 +17,6 @@ function RefreshHandler({ setIsAuthenticated }) {
         }
     }, [user, loading, setIsAuthenticated]);
 
-    // ...existing code...
 
     useEffect(() => {
         const data = localStorage.getItem('user-info');

@@ -154,47 +154,47 @@ export const requireRole = (roles) => {
   };
 };
 
-// Session Management
-export const sessionManager = {
-  activeSessions: new Map(),
+// Session Management - (Not required as of now, cz we are using JWT to authenticate)
+// export const sessionManager = {
+//   activeSessions: new Map(),
 
-  createSession: (userId, deviceInfo) => {
-    const sessionId = `${userId}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    sessionManager.activeSessions.set(sessionId, {
-      userId,
-      deviceInfo,
-      createdAt: new Date(),
-      lastActive: new Date()
-    });
-    return sessionId;
-  },
+//   createSession: (userId, deviceInfo) => {
+//     const sessionId = `${userId}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+//     sessionManager.activeSessions.set(sessionId, {
+//       userId,
+//       deviceInfo,
+//       createdAt: new Date(),
+//       lastActive: new Date()
+//     });
+//     return sessionId;
+//   },
 
-  updateActivity: (sessionId) => {
-    const session = sessionManager.activeSessions.get(sessionId);
-    if (session) {
-      session.lastActive = new Date();
-    }
-  },
+//   updateActivity: (sessionId) => {
+//     const session = sessionManager.activeSessions.get(sessionId);
+//     if (session) {
+//       session.lastActive = new Date();
+//     }
+//   },
 
-  removeSession: (sessionId) => {
-    sessionManager.activeSessions.delete(sessionId);
-  },
+//   removeSession: (sessionId) => {
+//     sessionManager.activeSessions.delete(sessionId);
+//   },
 
-  getUserSessions: (userId) => {
-    const sessions = [];
-    for (const [sessionId, session] of sessionManager.activeSessions) {
-      if (session.userId.toString() === userId.toString()) {
-        sessions.push({ sessionId, ...session });
-      }
-    }
-    return sessions;
-  },
+//   getUserSessions: (userId) => {
+//     const sessions = [];
+//     for (const [sessionId, session] of sessionManager.activeSessions) {
+//       if (session.userId.toString() === userId.toString()) {
+//         sessions.push({ sessionId, ...session });
+//       }
+//     }
+//     return sessions;
+//   },
 
-  clearUserSessions: (userId) => {
-    for (const [sessionId, session] of sessionManager.activeSessions) {
-      if (session.userId.toString() === userId.toString()) {
-        sessionManager.activeSessions.delete(sessionId);
-      }
-    }
-  }
-};
+//   clearUserSessions: (userId) => {
+//     for (const [sessionId, session] of sessionManager.activeSessions) {
+//       if (session.userId.toString() === userId.toString()) {
+//         sessionManager.activeSessions.delete(sessionId);
+//       }
+//     }
+//   }
+// };
