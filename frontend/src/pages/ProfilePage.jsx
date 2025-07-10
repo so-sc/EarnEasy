@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Typography, Avatar, Divider, Grid, IconButton } from '@mui/material';
-import { Edit, Person, FavoriteBorder, ShoppingCart, CardGiftcard, ContactMail, Logout } from '@mui/icons-material';
+import { Box, Button, Typography, Avatar, Grid, IconButton } from '@mui/material';
+import { Edit, Person, FavoriteBorder, ShoppingCart, CardGiftcard, Logout } from '@mui/icons-material';
 
 const ProfilePage = ({ mode, setMode }) => {
     const navigate = useNavigate();
@@ -225,33 +225,6 @@ const ProfilePage = ({ mode, setMode }) => {
                     <Typography variant="subtitle1" fontWeight="medium" sx={{ mb: 2 }}>
                         Others
                     </Typography>
-                    <Button
-                        fullWidth
-                        variant="outlined"
-                        startIcon={<ContactMail />}
-                        sx={{
-                            borderRadius: '12px',
-                            textTransform: 'none',
-                            backgroundColor: 'background.paper',
-                            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-                            padding: 2,
-                            color: 'text.primary',
-                            mb: 2,
-                            borderColor: 'divider',
-                            transition: 'all 0.2s ease-in-out',
-                            '&:hover': {
-                                backgroundColor: 'action.hover',
-                                transform: 'scale(1.02)',
-                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                                borderColor: 'primary.main',
-                            },
-                            '&:active': {
-                                transform: 'scale(0.98)',
-                            },
-                        }}
-                    >
-                        Contact Us
-                    </Button>
                     <Button
                         variant="contained"
                         onClick={toggleTheme}

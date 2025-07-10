@@ -14,6 +14,14 @@ import RefreshHandler from './utils/RefreshHandler.jsx';
 import BottomNavBar from './components/BottomNavBar.jsx';
 import PrivateRoute from './utils/PrivateRoute';
 
+// Import category pages
+import ElectronicsPage from './pages/explore/ElectronicsPage.jsx';
+import StudyPage from './pages/explore/StudyPage.jsx';
+import FashionPage from './pages/explore/FashionPage.jsx';
+import VehiclesPage from './pages/explore/VehiclesPage.jsx';
+import GadgetsPage from './pages/explore/GadgetsPage.jsx';
+import BeautyPage from './pages/explore/BeautyPage.jsx';
+import FoodPage from './pages/explore/FoodPage.jsx';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -40,17 +48,25 @@ const AppContent = ({ isAuthenticated, setIsAuthenticated, mode, setMode }) => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <SessionInfo />
-            <RefreshHandler setIsAuthenticated={setIsAuthenticated} />            
+            <RefreshHandler setIsAuthenticated={setIsAuthenticated} />
             <Routes>
-                <Route path="/" element={<LandingPage />} />                
+                <Route path="/" element={<LandingPage isAuthenticated={isAuthenticated} />} />
                 <Route path="/auth" element={<GoogleLogin setIsAuthenticated={setIsAuthenticated} />} />
                 <Route path="/add" element={<AddPage />} />
                 <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/explore" element={<ExplorePage />} />
+                    {/* Category routes */}
+                    <Route path="/explore/electronics" element={<ElectronicsPage />} />
+                    <Route path="/explore/study" element={<StudyPage />} />
+                    <Route path="/explore/fashion" element={<FashionPage />} />
+                    <Route path="/explore/vehicles" element={<VehiclesPage />} />
+                    <Route path="/explore/gadgets" element={<GadgetsPage />} />
+                    <Route path="/explore/beauty" element={<BeautyPage />} />
+                    <Route path="/explore/food" element={<FoodPage />} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/profile" element={<ProfilePage mode={mode} setMode={setMode} />} />
-                </Route>                
+                </Route>
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
             {location.pathname !== '/auth' && location.pathname !== "/" && <BottomNavBar />}
@@ -94,11 +110,11 @@ export default App;
 // import CartPage from "./pages/CartPage.jsx";
 // import AddPage from "./pages/AddPage.jsx";
 // import BottomNavBar from './components/BottomNavBar.jsx';
-
+//
 // import { ThemeProvider, createTheme } from '@mui/material/styles';
 // import CssBaseline from '@mui/material/CssBaseline';
 // import { indigo } from '@mui/material/colors';
-
+//
 // const getTheme = (mode) =>
 //     createTheme({
 //         palette: {
@@ -113,38 +129,38 @@ export default App;
 //             },
 //         },
 //     });
-
+//
 // // To fix authentication and /auth
 // const AppContent = ({  mode, setMode }) => {
 //     const location = useLocation();
 //     const theme = getTheme(mode);
-
+//
 //     return (
 //         <ThemeProvider theme={theme}>
 //             <CssBaseline />
 //             <Routes>
 //                 <Route path="/" element={<LandingPage />} />
-
+//
 //                 <Route path="/home" element={<HomePage />} />
 //                 <Route path="/explore" element={<ExplorePage />} />
 //                 <Route path="/add" element={<AddPage />} />
 //                 <Route path="/cart" element={<CartPage />} />
 //                 <Route path="/profile" element={<ProfilePage mode={mode} setMode={setMode} />} />
-
+//
 //                 <Route path="*" element={<ErrorPage />} />
 //             </Routes>
 //             {location.pathname !== '/auth' && location.pathname !== "/" && <BottomNavBar />}
 //         </ThemeProvider>
 //     );
 // };
-
+//
 // const App = () => {
 //     const [mode, setMode] = useState(() => localStorage.getItem('themeMode') || 'light');
-
+//
 //     useEffect(() => {
 //         localStorage.setItem('themeMode', mode);
 //     }, [mode]);
-
+//
 //     return (
 //         <BrowserRouter>
 //             <AppContent
@@ -154,5 +170,5 @@ export default App;
 //         </BrowserRouter>
 //     );
 // };
-
+//
 // export default App;

@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Container,
     Typography,
     Box,
     Grid,
     Button,
-    Card,
-    CardMedia,
-    CardContent,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CategoriesBar from "../components/CategoriesBar.jsx";
 
-const LandingPage = () => {
+const LandingPage = ({ isAuthenticated }) => {
     const navigate = useNavigate();
+
+    // Redirect to home if user is already authenticated
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/home');
+        }
+    }, [isAuthenticated, navigate]);
 
     const handleSignUpClick = () => {
         navigate('/auth');

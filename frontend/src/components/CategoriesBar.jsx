@@ -1,16 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
-    { name: "Electronics", img: "/images/electronics.png" },
-    { name: "Study", img: "/images/study.png" },
-    { name: "Fashion", img: "/images/fashion.png" },
-    { name: "Vehicle", img: "/images/vehicles.png" },
-    { name: "Gadgets", img: "/images/gadgets.png" },
-    { name: "Beauty", img: "/images/beauty.png" },
-    { name: "Food", img: "/images/food.png" }
+    { name: "Electronics", img: "/images/electronics.png", path: "/explore/electronics" },
+    { name: "Study", img: "/images/study.png", path: "/explore/study" },
+    { name: "Fashion", img: "/images/fashion.png", path: "/explore/fashion" },
+    { name: "Vehicle", img: "/images/vehicles.png", path: "/explore/vehicles" },
+    { name: "Gadgets", img: "/images/gadgets.png", path: "/explore/gadgets" },
+    { name: "Beauty", img: "/images/beauty.png", path: "/explore/beauty" },
+    { name: "Food", img: "/images/food.png", path: "/explore/food" }
 ];
 
 const CategoriesBar = () => {
+    const navigate = useNavigate();
+
     return (
         <div
             className="flex justify-evenly overflow-x-auto pb-2 mb-4 gap-20"
@@ -31,7 +34,7 @@ const CategoriesBar = () => {
                 <button
                     key={i}
                     className="text-center text-sm text-gray-600 min-w-max focus:outline-none"
-                    onClick={() => console.log(`${cat.name} clicked`)}
+                    onClick={() => navigate(cat.path)}
                     style={{
                         transition: 'all 0.2s ease-in-out',
                     }}

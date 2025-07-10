@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom'; // Add this import
+import { useLocation } from 'react-router-dom';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
@@ -12,9 +12,25 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 
 export default function BottomNavbar() {
-    const [value, setValue] = React.useState(0);
     const navigate = useNavigate();
-    const location = useLocation(); // Add this hook
+    const location = useLocation();
+
+    // Determine the active tab based on current path
+    const getActiveTab = (path) => {
+        if (path.startsWith('/home')) return 0;
+        if (path === '/explore' || path.startsWith('/explore/')) return 1;
+        if (path === '/add') return 2;
+        if (path === '/cart') return 3;
+        if (path === '/profile') return 4;
+        return 0; // Default to home if path doesn't match
+    };
+
+    const [value, setValue] = React.useState(getActiveTab(location.pathname));
+
+    // Update the value whenever location changes
+    React.useEffect(() => {
+        setValue(getActiveTab(location.pathname));
+    }, [location.pathname]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -53,7 +69,7 @@ export default function BottomNavbar() {
                         zIndex: 1300,
                         bgcolor: 'white',
                         borderRadius: '50%',
-                        display: location.pathname === '/add' ? 'none' : 'block' // Add this line
+                        display: location.pathname === '/add' ? 'none' : 'block'
                     }}
                 >
                     <AddCircleRoundedIcon sx={{ fontSize: 60, color: '#2596be' }} />

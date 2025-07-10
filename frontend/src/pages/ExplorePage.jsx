@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useTheme } from "@mui/material/styles";
 import MobileExplorePage from "./mobileExplorePage";
 import DesktopExplorePage from "./DesktopExplorePage";
 
 const ExplorePage = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 600);
+      setIsMobile(window.innerWidth < 768); // Standard 768px breakpoint
     };
 
     handleResize(); // run once on mount
@@ -16,10 +18,10 @@ const ExplorePage = () => {
   }, []);
 
   return (
-  <div className="min-h-screen bg-white text-black px-0 md:px-0 pb-24 pt-0 md:pt-0">
-
-
-
+    <div className="min-h-screen" style={{
+      backgroundColor: theme.palette.background.default,
+      color: theme.palette.text.primary
+    }}>
       {isMobile ? <MobileExplorePage /> : <DesktopExplorePage />}
     </div>
   );
