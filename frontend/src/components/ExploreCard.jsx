@@ -1,28 +1,31 @@
-import { useState, useEffect, useRef } from 'react';
-import { 
-  Card, 
-  CardMedia, 
-  CardContent, 
-  Typography, 
-  Modal,
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Typography,
+  Button,
   Box,
+  Modal,
   useTheme
-} from "@mui/material";
+} from '@mui/material';
 
 /**
- * PressableProductCard - Shows product cards on the home page
- * Styled to match ExploreCard.jsx but without the Order Now button
+ * ExploreCard - A product card component specifically for explore pages
+ * Combines styling from ProductCard.jsx and press-to-preview from PressableProductCard.jsx
  */
-const PressableProductCard = ({ item }) => {
+const ExploreCard = ({ product }) => {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const pressTimer = useRef(null);
   const longPressThreshold = 500; // 500ms for long press
 
+  // Handle press events for modal preview
   const handlePressStart = (e) => {
     e.preventDefault();
     pressTimer.current = setTimeout(() => {
-      setOpen(true);
+      setModalOpen(true);
     }, longPressThreshold);
   };
 
@@ -31,10 +34,7 @@ const PressableProductCard = ({ item }) => {
     clearTimeout(pressTimer.current);
   };
 
-  const handleModalClose = () => {
-    setOpen(false);
-  };
-
+  // Clean up timer on unmount
   useEffect(() => {
     return () => {
       if (pressTimer.current) {
@@ -42,11 +42,6 @@ const PressableProductCard = ({ item }) => {
       }
     };
   }, []);
-
-  // Return null if item data is missing
-  if (!item || !item.img) {
-    return null;
-  }
 
   return (
     <>
@@ -66,13 +61,14 @@ const PressableProductCard = ({ item }) => {
           '&:active': {
             transform: 'scale(0.98)',
           },
-          height: '100%',
+          height: '100%', // Ensures the card fills the container height
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
           bgcolor: theme.palette.background.paper,
-          // Consistent sizing with ExploreCard
+          // Make the card bigger with minimum height
           minHeight: { xs: 300, sm: 320, md: 340 },
+          // Explicitly set margins to 0 to avoid any unexpected spacing
           m: 0,
         }}
         onMouseDown={handlePressStart}
@@ -81,22 +77,22 @@ const PressableProductCard = ({ item }) => {
         onTouchStart={handlePressStart}
         onTouchEnd={handlePressEnd}
         onTouchCancel={handlePressEnd}
-        onClick={(e) => e.preventDefault()} // Prevent click behavior
+        onClick={(e) => e.preventDefault()} // Prevent click behavior to match PressableProductCard
       >
         <CardMedia
           component="img"
-          image={item.img}
-          alt={item.name}
+          image={product.image}
+          alt={product.name}
           sx={{
             width: '100%',
             objectFit: 'cover',
-            aspectRatio: '16/9',
-            minHeight: { xs: 150, sm: 170, md: 180 },
+            aspectRatio: '16/9', // Match the aspect ratio from PressableProductCard
+            minHeight: { xs: 150, sm: 170, md: 180 }, // Ensure minimum height for the image
           }}
         />
         <CardContent sx={{ flexGrow: 1, p: 2 }}>
           <Typography variant="body2" color="text.secondary" fontWeight="bold">
-            {item.desc}
+            {product.type}
           </Typography>
           <Typography
             variant="h5"
@@ -106,7 +102,7 @@ const PressableProductCard = ({ item }) => {
             {new Intl.NumberFormat('en-IN', {
               style: 'currency',
               currency: 'INR',
-            }).format(item.price)}
+            }).format(product.price)}
             <Typography variant="caption" component="span" color="text.secondary" sx={{ ml: 0.5 }}>
               per/Hr
             </Typography>
@@ -117,15 +113,36 @@ const PressableProductCard = ({ item }) => {
             fontWeight="bold"
             sx={{ mt: 1, fontSize: { xs: '1rem', sm: '1.1rem' } }}
           >
-            {item.name}
+            {product.name}
           </Typography>
         </CardContent>
+
+        <CardActions sx={{ p: 2, pt: 0 }}>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{
+              backgroundColor: theme.palette.primary.main,
+              color: '#fff',
+              '&:hover': {
+                backgroundColor: theme.palette.primary.dark
+              },
+              borderRadius: 3,
+              textTransform: 'none',
+              fontWeight: 'bold',
+              py: 1.2, // Increased padding to make the button taller
+              fontSize: '1rem', // Larger font size for the button
+            }}
+          >
+            Order Now
+          </Button>
+        </CardActions>
       </Card>
 
       {/* Modal Preview */}
       <Modal
-        open={open}
-        onClose={handleModalClose}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
         aria-labelledby="product-modal"
         aria-describedby="product-description"
         sx={{
@@ -145,13 +162,13 @@ const PressableProductCard = ({ item }) => {
             overflow: 'auto',
             border: 'none',
             outline: 'none',
-            width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
+            width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' }, // Made modal wider
           }}
         >
           <CardMedia
             component="img"
-            image={item.img}
-            alt={item.name}
+            image={product.image}
+            alt={product.name}
             sx={{
               width: '100%',
               objectFit: 'cover',
@@ -161,20 +178,39 @@ const PressableProductCard = ({ item }) => {
           />
           <Box sx={{ mt: 2 }}>
             <Typography variant="h5" component="h2" gutterBottom>
-              {item.name}
+              {product.name}
             </Typography>
             <Typography variant="body1" color="text.secondary" paragraph>
-              {item.desc}
+              {product.type}
             </Typography>
             <Typography variant="h4" color="primary">
               {new Intl.NumberFormat('en-IN', {
                 style: 'currency',
                 currency: 'INR',
-              }).format(item.price)}
+              }).format(product.price)}
               <Typography variant="body1" component="span" sx={{ ml: 1 }}>
                 per/Hr
               </Typography>
             </Typography>
+
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{
+                mt: 3,
+                py: 1.5,
+                backgroundColor: theme.palette.primary.main,
+                '&:hover': {
+                  backgroundColor: theme.palette.primary.dark
+                },
+                borderRadius: 3,
+                textTransform: 'none',
+                fontWeight: 'bold',
+                fontSize: '1.1rem',
+              }}
+            >
+              Order Now
+            </Button>
           </Box>
         </Box>
       </Modal>
@@ -182,4 +218,4 @@ const PressableProductCard = ({ item }) => {
   );
 };
 
-export default PressableProductCard;
+export default ExploreCard;

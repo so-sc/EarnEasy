@@ -1,13 +1,3 @@
-///import React from 'react'
-
-////const AddPage = () => {
-
-  ///  return (
-     //   <div className="flex flex-col items-center justify-center gap-5 p-5">
-       //     <h1 className="text-5xl">Add</h1>
-  ///      </div>
-    //)
-//}
 import React, { useState } from 'react';
 import {
   Box,
@@ -24,8 +14,10 @@ import {
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 const AddPage = () => {
+  const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [form, setForm] = useState({
     productName: '',
@@ -127,7 +119,7 @@ const AddPage = () => {
     <Container maxWidth="xs" sx={{ py: 3 }}>
       {/* Header */}
       <Box mb={2} display="flex" alignItems="center">
-        <IconButton size="small">
+        <IconButton size="small" onClick={() => navigate(-1)}>
           <ArrowBackIcon />
         </IconButton>
       </Box>
