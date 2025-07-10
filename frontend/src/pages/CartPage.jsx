@@ -16,7 +16,7 @@ import image from "../assets/order_not_found.png";
 import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import CartCard from "../components/CartCard";
-import ordersdata from "../data/ordersdata.json";
+import ordersdata from "../dummyData/ordersdata.json";
 
 export default function CartPage() {
   const [products, setProducts] = useState([]);
