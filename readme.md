@@ -38,12 +38,6 @@
 ### 🎯 Mission Statement
 To provide a robust, scalable, and secure marketplace platform that empowers businesses to create exceptional e-commerce experiences while maintaining the highest standards of security and performance.
 
-### 🏢 Enterprise Features
-- **Advanced Session Management** - JWT-based authentication with refresh tokens
-- **Role-Based Access Control** - Granular permission management
-- **Google OAuth Integration** - Seamless social authentication
-
----
 
 ## ✨ Key Features
 
@@ -94,7 +88,7 @@ To provide a robust, scalable, and secure marketplace platform that empowers bus
 ### Technology Stack
 - **Frontend**: React 18 + Vite + Material-UI
 - **Backend**: Node.js + Express.js + Mongoose
-- **Database**: MongoDB with Mongoose ODM
+- **Database**: MongoDB
 - **Authentication**: JWT + Google OAuth 2.0
 - **Development**: Hot reloading, ESM modules, modern JS/ES6+
 
@@ -193,7 +187,7 @@ EarnEasy/
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/Rajaykumar12/EarnEasy.git
+   git clone https://github.com/so-sc/EarnEasy.git
    cd EarnEasy
    ```
 
