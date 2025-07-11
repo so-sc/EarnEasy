@@ -33,7 +33,7 @@
 
 ## 📋 Overview
 
-**EarnEasy** is an enterprise-grade e-commerce marketplace platform designed for scalability, security, and exceptional user experience. Built with modern web technologies, it provides a comprehensive solution for online marketplace management with advanced authentication, real-time features, and enterprise-level security standards.
+**EarnEasy** is a modern e-commerce marketplace platform designed for scalability, security, and exceptional user experience. Built with modern web technologies, it provides a foundation for online marketplace management with Google OAuth authentication, JWT session management, and clean architecture.
 
 ### 🎯 Mission Statement
 To provide a robust, scalable, and secure marketplace platform that empowers businesses to create exceptional e-commerce experiences while maintaining the highest standards of security and performance.
@@ -44,16 +44,16 @@ To provide a robust, scalable, and secure marketplace platform that empowers bus
 ### 🔐 Authentication & Security
 - 🛡️ **Google OAuth 2.0 Integration** - Secure social login with Google
 - 🔑 **JWT Authentication** - Stateless authentication with refresh tokens (7-day expiry)
-- 👥 **Role-Based Access Control (RBAC)** - Admin, user, seller, and custom roles
-- 🔒 **Session Management** - Multi-device session tracking and management
-- 🛡️ **Security Headers** - HSTS, CSP, X-Frame-Options, and CORS protection
-- 🔐 **Data Encryption** - Secure password hashing with bcrypt
+- 👥 **Role-Based Access Control (RBAC)** - Basic role structure (ready for expansion)
+- 🔒 **Session Management** - JWT-based session tracking
+- 🛡️ **Security Headers** - CORS protection (ready for additional headers)
+- 🔐 **Data Encryption** - Secure data transmission and storage
 - 📊 **Session Analytics** - Track user sessions across devices
 
 ### 🛍️ E-commerce Capabilities
-- 🏪 **Multi-vendor Marketplace** - Support for multiple sellers and vendors
+- 🏪 **Multi-vendor Marketplace** - Foundation for multiple sellers (structure ready)
 - 📦 **Product Management** - Complete CRUD operations for products
-- 🔍 **Advanced Search & Filtering** - Category-based product discovery
+- 🔍 **Advanced Search & Filtering** - Basic search with category filtering
 - 📱 **Mobile-First Design** - Responsive UI for all device types
 - 🛒 **Shopping Cart** - Persistent cart functionality
 - 📊 **User Profiles** - Comprehensive user management
@@ -63,8 +63,8 @@ To provide a robust, scalable, and secure marketplace platform that empowers bus
 - ⚡ **Hot Module Replacement** - Vite for instant development feedback
 - 🧩 **Modular Architecture** - Clean separation of concerns
 - 📦 **RESTful API Design** - OpenAPI-ready endpoints
-- 🔄 **CI/CD Ready** - GitHub Actions integration
-- 🧪 **Testing Framework** - Comprehensive test coverage
+- 🔄 **CI/CD Ready** - GitHub Actions configuration ready
+- 🧪 **Testing Framework** - Test structure ready for implementation
 - 📝 **Code Quality** - ESLint and Prettier configuration
 
 ---
@@ -107,7 +107,7 @@ To provide a robust, scalable, and secure marketplace platform that empowers bus
 | **Backend** | Node.js + Express | Server runtime and web framework |
 | **Database** | MongoDB + Mongoose | NoSQL database with ODM |
 | **Authentication** | JWT + Google OAuth | Secure authentication system |
-| **Security** | bcrypt + CORS | Password hashing and security headers |
+| **Security** | CORS + JWT | Security headers and token validation |
 | **Development** | ESLint + Prettier | Code quality and formatting |
 
 ---
@@ -254,7 +254,6 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 FRONTEND_URL=http://localhost:5173
 
 # Security (Optional)
-BCRYPT_ROUNDS=12
 CORS_ORIGIN=http://localhost:5173
 ```
 
@@ -306,7 +305,7 @@ sequenceDiagram
 ### JWT Session Management
 - **Token Generation**: 7-day refresh tokens with user payload
 - **Token Validation**: Middleware validates tokens on protected routes
-- **Session Tracking**: In-memory session management for multi-device support
+- **Session Tracking**: Basic JWT session management
 - **Logout**: Client-side token removal with server-side validation
 
 ---
@@ -354,13 +353,12 @@ GET    /users/sessions    # Get active sessions
 ### Authentication Security
 - **JWT Tokens**: Stateless authentication with 7-day expiry
 - **Google OAuth**: Secure third-party authentication
-- **Password Hashing**: bcrypt with 12 rounds
-- **Session Management**: Multi-device session tracking
+- **Session Management**: JWT-based session tracking
 
 ### Application Security
 - **CORS Protection**: Configured for specific origins
-- **Input Validation**: Server-side validation for all inputs
-- **Security Headers**: HSTS, CSP, X-Frame-Options
+- **Input Validation**: Basic server-side validation
+- **Security Headers**: CORS (ready for additional headers)
 - **Error Handling**: Secure error messages without sensitive data
 
 ### Data Protection
