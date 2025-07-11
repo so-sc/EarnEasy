@@ -25,11 +25,8 @@
 - [Authentication Flow](#-authentication-flow)
 - [API Documentation](#-api-documentation)
 - [Security](#-security)
-- [Testing](#-testing)
-- [Deployment](#-deployment)
 - [Performance](#-performance)
 - [Contributing](#-contributing)
-- [License](#-license)
 - [Support](#-support)
 
 ---
@@ -380,29 +377,6 @@ GET    /users/sessions    # Get active sessions
 
 ---
 
-### Running Tests
-```bash
-# Backend Tests
-cd backend
-npm test
-npm run test:coverage
-
-# Frontend Tests
-cd frontend
-npm test
-npm run test:coverage
-
-# E2E Tests
-npm run test:e2e
-```
-
-### Environment-Specific Configurations
-- **Development**: Hot reloading, debug logging
-- **Staging**: Production-like environment for testing
-- **Production**: Optimized builds, security headers, monitoring
-
----
-
 ## 📈 Performance
 
 ### Optimization Strategies
@@ -442,8 +416,7 @@ npm run test:e2e
 
 ---
 
-
-## 📞 Support
+##  Support
 
 ### Getting Help
 - **Documentation**: This README and inline code comments
