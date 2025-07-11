@@ -384,14 +384,6 @@ GET    /users/sessions    # Get active sessions
 
 ---
 
-## 🧪 Testing
-
-### Test Coverage
-- **Unit Tests**: Component and function testing
-- **Integration Tests**: API endpoint testing
-- **E2E Tests**: Full user flow testing
-- **Coverage Goal**: >95% code coverage
-
 ### Running Tests
 ```bash
 # Backend Tests
@@ -406,43 +398,6 @@ npm run test:coverage
 
 # E2E Tests
 npm run test:e2e
-```
-
----
-
-## 🚀 Deployment
-
-### Production Environment
-```bash
-# Build frontend
-cd frontend
-npm run build
-
-# Start production server
-cd backend
-NODE_ENV=production npm start
-```
-
-### Docker Deployment
-```dockerfile
-# Use Node.js LTS
-FROM node:18-alpine
-
-# Set working directory
-WORKDIR /app
-
-# Copy and install dependencies
-COPY package*.json ./
-RUN npm ci --only=production
-
-# Copy application code
-COPY . .
-
-# Expose port
-EXPOSE 3000
-
-# Start application
-CMD ["npm", "start"]
 ```
 
 ### Environment-Specific Configurations
