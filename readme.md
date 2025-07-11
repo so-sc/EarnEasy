@@ -496,35 +496,13 @@ CMD ["npm", "start"]
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-```
-MIT License
-
-Copyright (c) 2025 EarnEasy Team
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
-
----
 
 ## 📞 Support
 
 ### Getting Help
 - **Documentation**: This README and inline code comments
-- **Issues**: [GitHub Issues](https://github.com/Rajaykumar12/EarnEasy/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Rajaykumar12/EarnEasy/discussions)
-- **Email**: [support@earneasy.com](mailto:support@earneasy.com)
+- **Issues**: [GitHub Issues](https://github.com/so-sc/EarnEasy)
+- **Discussions**: [GitHub Discussions](https://github.com/so-sc/EarnEasy/discussions)
 
 ### Community
 - **Contributors**: Thank you to all contributors who have helped make this project better
@@ -537,6 +515,6 @@ copies or substantial portions of the Software.
 
 **Made with ❤️ by the EarnEasy Team**
 
-[⭐ Star this repo](https://github.com/Rajaykumar12/EarnEasy) | [🐛 Report Bug](https://github.com/Rajaykumar12/EarnEasy/issues) | [📈 Request Feature](https://github.com/Rajaykumar12/EarnEasy/issues)
+[⭐ Star this repo](https://github.com/so-sc/EarnEasy) | [🐛 Report Bug](https://github.com/so-sc/EarnEasy/issues) | [📈 Request Feature](https://github.com/so-sc/EarnEasy/issues)
 
 </div>
