@@ -91,16 +91,16 @@ To provide a robust, scalable, and secure marketplace platform that empowers bus
 
 ### System Architecture
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │    Backend      │    │    Database     │
-│   (React SPA)   │◄──►│  (Node.js API)  │◄──►│   (MongoDB)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         │                       │                       │
-    ┌─────────┐              ┌─────────┐            ┌─────────┐
-    │Material │              │Express  │            │Mongoose │
-    │   UI    │              │Middleware│            │   ODM   │
-    └─────────┘              └─────────┘            └─────────┘
+┌────────────────────┐    ┌────────────────────┐    ┌────────────────────┐
+│     Frontend       │    │      Backend       │    │      Database      │
+│    (React SPA)     │◄──►│   (Node.js API)    │◄──►│      (MongoDB)     │
+└────────────────────┘    └────────────────────┘    └────────────────────┘
+         │                        │                        │
+         │                        │                        │
+   ┌──────────────┐         ┌─────────────┐          ┌──────────────┐
+   │  Material UI │         │   Express   │          │   Mongoose   │
+   │    (UI)      │         │ Middleware  │          │    ODM       │
+   └──────────────┘         └─────────────┘          └──────────────┘
 ```
 
 ### Technology Stack
