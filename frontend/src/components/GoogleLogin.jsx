@@ -2,27 +2,23 @@ import { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useLocation, useNavigate } from "react-router-dom";
 import { googleAuth } from "../api/apiFetch.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const GoogleLogin = ({ setIsAuthenticated }) => {
-	const [user, setUser] = useState(null);
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { setAuth } = useAuth();
 
 	const responseGoogle = async (authResult) => {
 		try {
 			if (authResult["code"]) {
-				const result = await googleAuth(authResult.code); //Fetch the user data from the backend using the code received from Google
-				const { email, name, picture } = result.data.user;
-				// console.log("Google Auth User result: ", result.data.user);
+				const result = await googleAuth(authResult.code); // Fetch the user data from the backend using the code received from Google
+				const { email, name, picture } = result.data.user; // console.log("Google Auth User result: ", result.data.user);
 
-				const token = result.data.token;
-				const obj = { email, name, token, picture };
-				localStorage.setItem("user-info", JSON.stringify(obj));
+				setAuth({ email, name, picture });
 
-				// Set the user authentication state right after the user loogs in
 				if (setIsAuthenticated) {
                     setIsAuthenticated(true);
-                    // console.log("Authentication state set to true");
                 } else {
                     console.error("GoogleLogin: setIsAuthenticated prop was not received!");
                 }

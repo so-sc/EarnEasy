@@ -43,12 +43,12 @@ To provide a robust, scalable, and secure marketplace platform that empowers bus
 
 ### 🔐 Authentication & Security
 - 🛡️ **Google OAuth 2.0 Integration** - Secure social login with Google
-- 🔑 **JWT Authentication** - Stateless authentication with refresh tokens (7-day expiry)
-- 👥 **Role-Based Access Control (RBAC)** - Basic role structure (ready for expansion)
-- 🔒 **Session Management** - JWT-based session tracking
-- 🛡️ **Security Headers** - CORS protection (ready for additional headers)
+- 🍪 **HTTP-Only Cookie Authentication** - JWT tokens stored in secure HTTP-only cookies for XSS protection
+- � **Token Blacklisting** - Secure logout with server-side token invalidation
+- 🔒 **Dual Authentication Support** - Both cookie and header-based authentication for flexibility
+- 🛡️ **Security Headers** - CORS protection with production-ready cookie settings
 - 🔐 **Data Encryption** - Secure data transmission and storage
-- 📊 **Session Analytics** - Track user sessions across devices
+- 📊 **Session Management** - Centralized authentication handling with AuthContext
 
 ### 🛍️ E-commerce Capabilities
 - 🏪 **Multi-vendor Marketplace** - Foundation for multiple sellers (structure ready)
@@ -87,9 +87,9 @@ To provide a robust, scalable, and secure marketplace platform that empowers bus
 
 ### Technology Stack
 - **Frontend**: React 18 + Vite + Material-UI
-- **Backend**: Node.js + Express.js + Mongoose
+- **Backend**: Node.js + Express.js + Mongoose  
 - **Database**: MongoDB
-- **Authentication**: JWT + Google OAuth 2.0
+- **Authentication**: HTTP-Only Cookies + JWT + Google OAuth 2.0
 - **Development**: Hot reloading, ESM modules, modern JS/ES6+
 
 ---
@@ -106,7 +106,7 @@ To provide a robust, scalable, and secure marketplace platform that empowers bus
 | **State Management** | React Context | Global state management |
 | **Backend** | Node.js + Express | Server runtime and web framework |
 | **Database** | MongoDB + Mongoose | NoSQL database with ODM |
-| **Authentication** | JWT + Google OAuth | Secure authentication system |
+| **Authentication** | HTTP-Only Cookies + JWT + Google OAuth | Secure authentication with XSS protection |
 | **Security** | CORS + JWT | Security headers and token validation |
 | **Development** | ESLint + Prettier | Code quality and formatting |
 
@@ -127,9 +127,9 @@ EarnEasy/
 │   │   ├── Products.js         # Product data model
 │   │   └── dbConnections.js    # Database connection
 │   ├── 📁 routes/              # API route definitions
-│   │   ├── authRouter.js       # Authentication routes
+│   │   ├── authRouter.js       # Authentication routes (consolidated)
 │   │   ├── productRoutes.js    # Product API routes
-│   │   └── sessionRoutes.js    # Session management routes
+│   │   └── profileRoutes.js    # User profile routes
 │   ├── 📁 utils/               # Utility functions
 │   │   └── googleClient.js     # Google OAuth configuration
 │   ├── index.js               # Server entry point
@@ -153,7 +153,7 @@ EarnEasy/
 │   │   │   ├── AddPage.jsx
 │   │   │   └── ProfilePage.jsx
 │   │   ├── 📁 context/         # React context providers
-│   │   │   └── SessionContext.jsx
+│   │   │   └── AuthContext.jsx # Authentication context (was SessionContext)
 │   │   ├── 📁 utils/           # Frontend utilities
 │   │   │   ├── PrivateRoute.jsx
 │   │   │   └── RefreshHandler.jsx
@@ -244,7 +244,7 @@ MONGODB_URI=mongodb://localhost:27017/earneasy
 
 # JWT Configuration
 JWT_SECRET=your_super_secret_jwt_key_minimum_32_characters
-JWT_REFRESH_EXPIRE=7d
+JWT_ACCESS_EXPIRE=7d
 
 # Google OAuth
 GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
@@ -298,15 +298,16 @@ sequenceDiagram
     Google->>Backend: Return user info & tokens
     Backend->>Database: Find or create user
     Database->>Backend: Return user data
-    Backend->>Frontend: Return JWT + user info
+    Backend->>Frontend: Set HTTP-only cookie + return user info
     Frontend->>User: Redirect to dashboard
 ```
 
-### JWT Session Management
-- **Token Generation**: 7-day refresh tokens with user payload
-- **Token Validation**: Middleware validates tokens on protected routes
-- **Session Tracking**: Basic JWT session management
-- **Logout**: Client-side token removal with server-side validation
+### Cookie-Based Authentication
+- **Token Storage**: JWT tokens stored in secure HTTP-only cookies
+- **XSS Protection**: Cookies cannot be accessed by client-side JavaScript
+- **Automatic Handling**: Browser automatically sends cookies with requests
+- **Token Blacklisting**: Server-side token invalidation on logout
+- **Dual Support**: Both cookie and header authentication for API flexibility
 
 ---
 

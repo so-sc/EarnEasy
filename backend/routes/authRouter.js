@@ -1,5 +1,6 @@
 import express from 'express';
-import { googleAuth } from '../controllers/authController.js';
+import { googleAuth, validateAuth, logout } from '../controllers/authController.js';
+import { authenticateToken } from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -8,7 +9,9 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/google',googleAuth);
+router.get('/google', googleAuth);
+router.get('/validate', authenticateToken, validateAuth);
+router.post('/logout', authenticateToken, logout);
 
 export default router;
 

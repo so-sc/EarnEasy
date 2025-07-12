@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSession } from '../context/SessionContext';
+import { useAuth } from '../context/AuthContext';
 
 const AuthSuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { setSession } = useSession();
+  const { setAuth } = useAuth();
 
   useEffect(() => {
     const token = searchParams.get('token');
@@ -15,8 +15,8 @@ const AuthSuccess = () => {
       try {
         const user = JSON.parse(decodeURIComponent(userParam));
         
-        // Set session with user data and token
-        setSession({
+        // Set auth with user data and token
+        setAuth({
           id: user.id,
           email: user.email,
           name: user.name,
@@ -35,7 +35,7 @@ const AuthSuccess = () => {
       console.error('Missing token or user data');
       navigate('/auth-error', { replace: true });
     }
-  }, [searchParams, setSession, navigate]);
+  }, [searchParams, setAuth, navigate]);
 
   return (
     <div style={{ 

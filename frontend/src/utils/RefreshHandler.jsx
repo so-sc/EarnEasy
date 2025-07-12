@@ -1,40 +1,37 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSession } from '../context/SessionContext';
+import { useAuth } from '../context/AuthContext';
 
 function RefreshHandler({ setIsAuthenticated }) {
     const location = useLocation();
     const navigate = useNavigate();
-    const { user, loading } = useSession();
+    const { user, loading } = useAuth();
 
     useEffect(() => {
         if (!loading) {
             if (user) {
                 setIsAuthenticated(true);
+
+                // If authenticated user is on auth page, redirect to home
+                if (location.pathname === '/auth') {
+                    const targetPath = location.state?.from || '/home';
+                    navigate(targetPath, { replace: true });
+                }
             } else {
                 setIsAuthenticated(false);
+
+                // Only redirect to / if user is on a protected route
+                // Allow staying on public routes: /, /auth
+                const publicRoutes = ['/', '/auth'];
+                const isOnPublicRoute = publicRoutes.includes(location.pathname);
+
+                if (!isOnPublicRoute) {
+                    // User is on a protected route without authentication - redirect to home
+                    navigate('/', { replace: true });
+                }
             }
         }
-    }, [user, loading, setIsAuthenticated]);
-
-
-    useEffect(() => {
-        const data = localStorage.getItem('user-info');
-        const token = JSON.parse(data)?.token;
-        
-        if (token) {
-            setIsAuthenticated(true);
-            if (location.pathname === '/auth') {
-                const targetPath = location.state?.from || '/home';
-                navigate(targetPath, { replace: true });
-            }
-        } else {
-            setIsAuthenticated(false);
-            if (location.pathname !== '/' && location.pathname !== '/auth') {
-                navigate('/auth', { replace: true, state: { from: location.pathname } });
-            }
-        }
-    }, [location.pathname, navigate, setIsAuthenticated]);
+    }, [user, loading, setIsAuthenticated, location, navigate]);
 
     return null;
 }
