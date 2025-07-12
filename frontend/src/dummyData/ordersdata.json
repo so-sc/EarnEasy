@@ -1,0 +1,83 @@
+[
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Smartphone",
+      "productName": "Galaxy S22 Ultra",
+      "pricePerHour": 2.5,
+      "quantity": 12,
+      "orderStatus": "Available"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Laptop",
+      "productName": "MacBook Pro M2",
+      "pricePerHour": 5.0,
+      "quantity": 7,
+      "orderStatus": "Available"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Audio",
+      "productName": "Sony WH-1000XM5",
+      "pricePerHour": 1.2,
+      "quantity": 25,
+      "orderStatus": "Available"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Wearable",
+      "productName": "Apple Watch Series 9",
+      "pricePerHour": 1.0,
+      "quantity": 15,
+      "orderStatus": "Limited"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Camera",
+      "productName": "Canon EOS R6",
+      "pricePerHour": 4.5,
+      "quantity": 3,
+      "orderStatus": "Out of Stock"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Tablet",
+      "productName": "iPad Pro 12.9",
+      "pricePerHour": 3.2,
+      "quantity": 8,
+      "orderStatus": "Available"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Audio",
+      "productName": "JBL Charge 5",
+      "pricePerHour": 0.9,
+      "quantity": 30,
+      "orderStatus": "Available"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Gadget",
+      "productName": "DJI Mini 3 Pro",
+      "pricePerHour": 6.0,
+      "quantity": 2,
+      "orderStatus": "Limited"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Gaming",
+      "productName": "Meta Quest 3",
+      "pricePerHour": 2.8,
+      "quantity": 10,
+      "orderStatus": "Available"
+    },
+    {
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202210?wid=2000&hei=1536&fmt=jpeg&qlt=90&.v=1664573209013",
+      "genre": "Display",
+      "productName": "LG Ultragear 27\"",
+      "pricePerHour": 1.7,
+      "quantity": 5,
+      "orderStatus": "Available"
+    }
+  ]
+  
