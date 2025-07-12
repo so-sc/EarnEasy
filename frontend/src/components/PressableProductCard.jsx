@@ -6,6 +6,7 @@ import {
   Typography, 
   Modal,
   Box,
+  Button,
   useTheme
 } from "@mui/material";
 
@@ -120,6 +121,32 @@ const PressableProductCard = ({ item }) => {
             {item.name}
           </Typography>
         </CardContent>
+
+        {/* Add to Cart Button */}
+        <Box sx={{ p: 2, pt: 0 }}>
+          <Button
+            variant="contained"
+            sx={{
+              width: '100%',
+              backgroundColor: theme.palette.primary.main,
+              color: 'white',
+              fontWeight: 600,
+              textTransform: 'none',
+              borderRadius: '8px',
+              '&:hover': {
+                backgroundColor: theme.palette.primary.dark,
+                transform: 'scale(1.02)',
+              },
+              transition: 'all 0.2s ease',
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              // Add to cart functionality here
+            }}
+          >
+            Add to Cart
+          </Button>
+        </Box>
       </Card>
 
       {/* Modal Preview */}
