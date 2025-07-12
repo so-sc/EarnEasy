@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Typography, Avatar, Grid, IconButton } from '@mui/material';
 import { Edit, Person, FavoriteBorder, ShoppingCart, CardGiftcard, Logout } from '@mui/icons-material';
+import { useAuth } from '../context/AuthContext';
 
 const ProfilePage = ({ mode, setMode }) => {
     const navigate = useNavigate();
-    const [userinfo, setUserinfo] = useState(null);
+    const { user, logout } = useAuth();
 
-    useEffect(() => {
-        const userData = localStorage.getItem('user-info');
-        const finalUserData = JSON.parse(userData);
-        setUserinfo(finalUserData);
-    }, []);
-
-    const handleLogout = () => {
-        localStorage.removeItem('user-info');
-        setUserinfo(null);
+    const handleLogout = async () => {
+        await logout();
         navigate('/');
     };
 
@@ -38,8 +31,8 @@ const ProfilePage = ({ mode, setMode }) => {
         >
             {/* Profile Image */}
             <Avatar
-                src={userinfo?.picture || "/images/default-profile.png"}
-                alt={userinfo?.name}
+                src={user?.picture || "/images/default-profile.png"}
+                alt={user?.name}
                 sx={{
                     width: 120,
                     height: 120,
@@ -67,33 +60,57 @@ const ProfilePage = ({ mode, setMode }) => {
                 {/* User Info */}
                 <Box sx={{ textAlign: 'center', mt: 5 }}>
                     <Typography variant="h6" fontWeight="bold">
-                        {userinfo?.name || 'user_name'}
+                        {user?.name || 'user_name'}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {userinfo?.email || 'user@gmail.com'}
+                        {user?.email || 'user@gmail.com'}
                     </Typography>
-                    <IconButton
-                        size="small"
-                        sx={{
-                            mt: 1,
-                            borderRadius: '20px',
-                            transition: 'all 0.2s ease-in-out',
-                            '&:hover': {
-                                backgroundColor: 'action.hover',
-                                transform: 'scale(1.05)',
-                                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                            },
-                            '&:active': {
-                                borderRadius: '8px', // Less rounded on click
-                                transform: 'scale(0.98)',
-                            },
-                        }}
-                    >
-                        <Edit fontSize="small" />
-                        <Typography variant="caption" sx={{ ml: 0.5 }}>
-                            Edit Profile
-                        </Typography>
-                    </IconButton>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 1 }}>
+                        <IconButton
+                            size="small"
+                            sx={{
+                                borderRadius: '20px',
+                                transition: 'all 0.2s ease-in-out',
+                                '&:hover': {
+                                    backgroundColor: 'action.hover',
+                                    transform: 'scale(1.05)',
+                                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                                },
+                                '&:active': {
+                                    borderRadius: '8px',
+                                    transform: 'scale(0.98)',
+                                },
+                            }}
+                        >
+                            <Edit fontSize="small" />
+                            <Typography variant="caption" sx={{ ml: 0.5 }}>
+                                Edit Profile
+                            </Typography>
+                        </IconButton>
+                        <IconButton
+                            size="small"
+                            onClick={handleLogout}
+                            sx={{
+                                borderRadius: '20px',
+                                color: 'error.main',
+                                transition: 'all 0.2s ease-in-out',
+                                '&:hover': {
+                                    backgroundColor: 'error.light',
+                                    transform: 'scale(1.05)',
+                                    boxShadow: '0 2px 8px rgba(255, 0, 0, 0.1)',
+                                },
+                                '&:active': {
+                                    borderRadius: '8px',
+                                    transform: 'scale(0.98)',
+                                },
+                            }}
+                        >
+                            <Logout fontSize="small" />
+                            <Typography variant="caption" sx={{ ml: 0.5 }}>
+                                Logout
+                            </Typography>
+                        </IconButton>
+                    </Box>
                 </Box>
 
                 {/* My Inventories Section */}
@@ -247,33 +264,6 @@ const ProfilePage = ({ mode, setMode }) => {
                         }}
                     >
                         Toggle to {mode === 'light' ? 'Dark' : 'Light'} Mode
-                    </Button>
-                    <Button
-                        fullWidth
-                        variant="outlined"
-                        startIcon={<Logout />}
-                        onClick={handleLogout}
-                        sx={{
-                            borderRadius: '12px',
-                            textTransform: 'none',
-                            backgroundColor: 'background.paper',
-                            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-                            padding: 2,
-                            color: 'text.primary',
-                            borderColor: 'divider',
-                            transition: 'all 0.2s ease-in-out',
-                            '&:hover': {
-                                backgroundColor: 'action.hover',
-                                transform: 'scale(1.02)',
-                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                                borderColor: 'primary.main',
-                            },
-                            '&:active': {
-                                transform: 'scale(0.98)',
-                            },
-                        }}
-                    >
-                        Log Out
                     </Button>
                 </Box>
             </Box>

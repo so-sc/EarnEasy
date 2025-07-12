@@ -4,60 +4,24 @@ import 'dotenv/config';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'earneasy-default-secret';
 
-// Generate Refresh Token (7 days)
-export const generateRefreshToken = (payload) => {
+const blacklistedTokens = new Set();
+
+// Generate Access Token (7 days)
+export const generateAccessToken = (payload) => {
   return jwt.sign(payload, JWT_SECRET, {
-    expiresIn: process.env.JWT_REFRESH_EXPIRE || '7d'
+    expiresIn: process.env.JWT_ACCESS_EXPIRE || '7d'
   });
 };
 
-// Verify JWT token middleware
-export const verifyToken = (req, res, next) => {
-  try {
-    const authHeader = req.headers.authorization;
-    
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({
-        success: false,
-        message: 'Access token is required'
-      });
-    }
-
-    const token = authHeader.split(' ')[1];
-    
-    if (!token) {
-      return res.status(401).json({
-        success: false,
-        message: 'No token provided'
-      });
-    }
-
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
-    req.userId = decoded.userId;
-    
-    next();
-  } catch (error) {
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({
-        success: false,
-        message: 'Token has expired',
-        code: 'TOKEN_EXPIRED'
-      });
-    }
-    
-    return res.status(401).json({
-      success: false,
-      message: 'Invalid token'
-    });
-  }
-};
-
-// Advanced Authentication Middleware with database lookup
+// Auth middleware to authenticate user based on both Cookie and JWT token
 export const authenticateToken = async (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+    let token = req.cookies?.authToken;
+    
+    if (!token) {
+      const authHeader = req.headers.authorization;
+      token = authHeader && authHeader.split(' ')[1];
+    }
 
     if (!token) {
       return res.status(401).json({
@@ -67,6 +31,15 @@ export const authenticateToken = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, JWT_SECRET);
+    
+    // Check if token is blacklisted
+    if (blacklistedTokens.has(token)) {
+      return res.status(401).json({
+        success: false,
+        message: 'Token has been revoked'
+      });
+    }
+    
     const user = await UserModel.findById(decoded.userId).select('-password -refreshTokens');
     
     if (!user) {
@@ -113,8 +86,12 @@ export const authenticateToken = async (req, res, next) => {
 // Optional auth middleware (for routes that work with or without auth)
 export const optionalAuth = async (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
+    let token = req.cookies?.authToken;
+    
+    if (!token) {
+      const authHeader = req.headers.authorization;
+      token = authHeader && authHeader.split(' ')[1];
+    }
     
     if (token) {
       const decoded = jwt.verify(token, JWT_SECRET);
@@ -152,6 +129,16 @@ export const requireRole = (roles) => {
 
     next();
   };
+};
+
+// Blacklist token function
+export const blacklistToken = (token) => {
+  blacklistedTokens.add(token);
+  
+  // Auto-remove expired tokens after 7 days (cleanup)
+  setTimeout(() => {
+    blacklistedTokens.delete(token);
+  }, 7 * 24 * 60 * 60 * 1000);
 };
 
 // Session Management - (Not required as of now, cz we are using JWT to authenticate)

@@ -1,16 +1,20 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import authRouter from './routes/authRouter.js';
 import productRouter from './routes/productRoutes.js';
-import sessionRouter from './routes/sessionRoutes.js';
+import profileRouter from './routes/profileRoutes.js';
 import './models/dbConnections.js'
 import cors from 'cors';
 import 'dotenv/config';
 
-
 const app = express();
-app.use(cors());
 
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true 
+}));
 
+app.use(cookieParser());
 app.use(express.json());
 app.get('/', (req, res) => {
     res.json({
@@ -18,12 +22,9 @@ app.get('/', (req, res) => {
     });
 });
 
-
-
 app.use('/auth', authRouter);
-app.use('/session', sessionRouter);
+app.use('/profile', profileRouter);
 app.use('/products', productRouter);
-
 
 //TODOs
 //In /routes folder define all the routes in  file
