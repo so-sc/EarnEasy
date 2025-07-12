@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 
@@ -25,9 +24,17 @@ const ProductCard = ({prod,index}) => {
                     {prod.model}
                 </Typography>
             </CardContent>
-            <div className="flex justify-center mb-4">
-                <Button variant="contained"  className="w-full bg-[#007C92]">
-                    Order Now
+            <div className="flex justify-center gap-2 mb-4 px-4">
+                <Button
+                    variant="contained"
+                    className="w-full bg-[#007C92] hover:bg-[#006b7d] transform transition duration-200 hover:scale-105"
+                    sx={{
+                        textTransform: 'none',
+                        fontWeight: 600,
+                        borderRadius: '8px',
+                    }}
+                >
+                    Add to Cart
                 </Button>
             </div>
         </Card>
