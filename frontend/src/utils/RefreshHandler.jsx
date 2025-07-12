@@ -21,8 +21,8 @@ function RefreshHandler({ setIsAuthenticated }) {
                 setIsAuthenticated(false);
 
                 // Only redirect to / if user is on a protected route
-                // Allow staying on public routes: /, /auth, /add
-                const publicRoutes = ['/', '/auth', '/add'];
+                // Allow staying on public routes: /, /auth
+                const publicRoutes = ['/', '/auth'];
                 const isOnPublicRoute = publicRoutes.includes(location.pathname);
 
                 if (!isOnPublicRoute) {

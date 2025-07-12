@@ -96,7 +96,7 @@ const App = () => {
 
 export default App;
 
-// If you want to disable authentication temporarily for testing, un-comment below code and comment above code
+// If you want to disable authentication temporarily for testing, un-comment below code and comment above code, and while creating a PR reverse the changes.
 // import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 // import { useEffect, useState } from 'react';
 // import LandingPage from './pages/LandingPage.jsx';
@@ -126,7 +126,7 @@ export default App;
 //         palette: {
 //             mode,
 //             primary: {
-//                 main: mode === 'light' ? '#0091ea' : '#039be5',
+//                 main: mode === 'light' ? '#0091ea' : '#039be5', // Button color
 //             },
 //             secondary: indigo,
 //             background: {
