@@ -14,4 +14,3 @@ router.get('/validate', authenticateToken, validateAuth);
 router.post('/logout', authenticateToken, logout);
 
 export default router;
-
