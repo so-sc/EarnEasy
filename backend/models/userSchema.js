@@ -10,15 +10,12 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    picture : {
+    picture: {
         type: String
     },
-})
+},
+    { timestamps: true });
 
 const UserModel = mongoose.model("social-logins", userSchema);
 
 export default UserModel;
-
-//TODOs
-// In this folder add all other models with their names
-// The main logic goes in the controllers folderr

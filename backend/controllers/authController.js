@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import UserModel from '../models/authModel.js';
+import UserModel from '../models/userSchema.js';
 import oauth2Client from '../utils/googleClient.js';
 import { generateAccessToken, blacklistToken } from '../middleware/authMiddleware.js';
 import 'dotenv/config';
