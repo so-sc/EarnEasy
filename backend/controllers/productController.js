@@ -1,7 +1,6 @@
-import Product from '../models/Products.js';
+import Product from '../models/ListingSchema.js';
 
-// GET all products
-const getAllProducts = async (req, res) => {
+const getAllListing = async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
@@ -11,16 +10,14 @@ const getAllProducts = async (req, res) => {
 };
 
 // POST a new product
-const createProduct = async (req,res) => {
+const createProduct = async (req, res) => {
   try {
-    console.log('Received request body:', req.body);
-    const { name, price, desc, img } = req.body;
-    
-    if (!name || !price || !desc || !img) {
-       console.log('Missing fields:', { name, price, desc, img });
-      return res.status(400).json({ error: 'All fields (name, price, desc, img) are required' });
+    const ownerId = req.userId;
+    const { title, price, description, features, img, condition, rentable, available } = req.body;
+    if (!title || !price || !description || !img || !features || !condition || !rentable) {
+      return res.status(400).json({ error: 'All fields are required' });
     }
-    const newProduct = new Product({ name, price, desc, img });
+    const newProduct = new Product({ title, price, description, features, img, ownerId, condition, rentable, available });
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
@@ -32,4 +29,17 @@ const createProduct = async (req,res) => {
   }
 };
 
-export {getAllProducts, createProduct};
+const getIndividualListing = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const individualProd = await Product.findById(productId);
+    if (!individualProd) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json(individualProd);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch one product', details: error.message });
+  }
+};
+
+export { getAllListing, createProduct, getIndividualListing };

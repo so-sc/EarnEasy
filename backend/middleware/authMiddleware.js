@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import UserModel from '../models/authModel.js';
+import UserModel from '../models/userSchema.js';
 import 'dotenv/config';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'earneasy-default-secret';
