@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/', getAllListing);
-router.post('/',authenticateToken, createProduct); //user authenticated route(protected)
+router.post('/create',authenticateToken, createProduct); //user authenticated route(protected)
 router.get('/:id', getIndividualListing)
 
 export default router;
