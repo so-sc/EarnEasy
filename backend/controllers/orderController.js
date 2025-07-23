@@ -1,4 +1,4 @@
-import Order, { find } from "../models/Order";
+import Order from "../models/order.js";
 
 export async function placeBuyOrder(req, res) {
   try {

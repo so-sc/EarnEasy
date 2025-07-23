@@ -1,6 +1,6 @@
 import { Router } from "express";
 const router = Router();
-import { placeBuyOrder, placeSellOrder, getUserOrders } from "../controllers/orderController";
+import { placeBuyOrder, placeSellOrder, getUserOrders } from "../controllers/orderController.js";
 
 // Routes
 router.post("/buy", placeBuyOrder);
