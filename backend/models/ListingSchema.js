@@ -7,9 +7,9 @@ const productSchema = new mongoose.Schema({
   description: { type: String, required: true },
   img: { type: String, required: true },
   features: { type: [String], required: true },
-  condition: {type: String, required: true},
-  rentable: {type: Boolean, required: true},
-  available: {type: Boolean}
+  condition: { type: String, enum: ['Good', 'Average', 'Bad'], required: true },
+  available: { type: Boolean },
+  typeOfOperation: { type: String, enum: ['sell', 'rent', 'both'], required: true }
 }, { timestamps: true });
 
 const Product = mongoose.model("Product", productSchema);
