@@ -13,6 +13,6 @@ router.get('/', (req, res) => {
 
 router.use('/auth', authRouter);
 router.use('/listing', listingRouter);
-router.use('/order', orderRoutes); 
+router.use('/orders', orderRoutes); 
 
 export default router;
