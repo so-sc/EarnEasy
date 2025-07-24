@@ -2,7 +2,12 @@ import Product from '../models/ListingSchema.js';
 
 const getAllListing = async (req, res) => {
   try {
-    const products = await Product.find();
+    const { typeOfOperation } = req.query;
+    let filter = {};
+    if (typeOfOperation) {
+      filter.typeOfOperation = typeOfOperation; 
+    }
+    const products = await Product.find(filter);
     res.json(products);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch products' });
@@ -13,11 +18,11 @@ const getAllListing = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     const ownerId = req.userId;
-    const { title, price, description, features, img, condition, rentable, available } = req.body;
-    if (!title || !price || !description || !img || !features || !condition || !rentable) {
+    const { title, price, description, features, img, condition, rentable, available, typeOfOperation } = req.body;
+    if (!title || !price || !description || !img || !features || !condition || !typeOfOperation) {
       return res.status(400).json({ error: 'All fields are required' });
     }
-    const newProduct = new Product({ title, price, description, features, img, ownerId, condition, rentable, available });
+    const newProduct = new Product({ title, price, description, features, img, ownerId, condition, available, typeOfOperation });
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
