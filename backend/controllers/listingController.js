@@ -5,7 +5,7 @@ const getAllListing = async (req, res) => {
     const { typeOfOperation } = req.query;
     let filter = {};
     if (typeOfOperation) {
-      filter.typeOfOperation = typeOfOperation; 
+      filter.typeOfOperation = typeOfOperation;
     }
     const products = await Product.find(filter);
     res.json(products);
@@ -68,7 +68,7 @@ const updateIndividualListing = async (req, res) => {
     await product.save();
     res.json(product);
 
-  }catch (error) {
+  } catch (error) {
     if (error.name === 'ValidationError') {
       res.status(400).json({ error: error.message });
     } else {
@@ -77,4 +77,26 @@ const updateIndividualListing = async (req, res) => {
   }
 }
 
-export { getAllListing, createProduct, getIndividualListing, updateIndividualListing };
+const deleteIndividualListing = async (req, res) => {
+  try {
+    const prodId = req.params.id
+    const producttobeDel = await Product.findById(prodId)
+    if (!producttobeDel) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    await producttobeDel.deleteOne()
+    res.json(res.json({
+      message: "Deleted the listing successfully!",
+      listing: producttobeDel
+    }));
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: 'Failed to delete the product', details: error.message });
+    }
+  }
+}
+
+export { getAllListing, createProduct, getIndividualListing, updateIndividualListing, deleteIndividualListing };
