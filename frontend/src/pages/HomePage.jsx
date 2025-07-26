@@ -11,7 +11,7 @@ const HomePage = () => {
 
   // Step 3: Fetch products from backend API
   useEffect(() => {
-    fetch("http://localhost:3000/products") // Change this URL to your actual backend endpoint
+    fetch("http://localhost:3000/listing") // Change this URL to your actual backend endpoint
       .then(res => res.json())
       .then(data => {
         setProducts(data);
