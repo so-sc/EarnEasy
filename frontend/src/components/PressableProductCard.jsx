@@ -97,7 +97,7 @@ const PressableProductCard = ({ item }) => {
         />
         <CardContent sx={{ flexGrow: 1, p: 2 }}>
           <Typography variant="body2" color="text.secondary" fontWeight="bold">
-            {item.desc}
+            {item.description || 'No description available'}
           </Typography>
           <Typography
             variant="h5"
