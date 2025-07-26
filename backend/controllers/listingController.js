@@ -22,7 +22,7 @@ const createProduct = async (req, res) => {
     if (!title || !price || !description || !img || !features || !condition || !typeOfOperation) {
       return res.status(400).json({ error: 'All fields are required' });
     }
-    const newProduct = new Product({ title, price, description, features, img, ownerId, condition, available, typeOfOperation });
+    const newProduct = new Product({ title, price, description, features, img, ownerId, condition, available, typeOfOperation, rentable });
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
@@ -47,4 +47,34 @@ const getIndividualListing = async (req, res) => {
   }
 };
 
-export { getAllListing, createProduct, getIndividualListing };
+const updateIndividualListing = async (req, res) => {
+  try {
+    const prodId = req.params.id;
+    const { title, price, description, features, img, condition, rentable, available, typeOfOperation } = req.body;
+    const product = await Product.findById(prodId)
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    product.title = title ?? product.title;
+    product.price = price ?? product.price;
+    product.description = description ?? product.description;
+    product.features = features ?? product.features;
+    product.img = img ?? product.img;
+    product.condition = condition ?? product.condition;
+    product.rentable = rentable ?? product.rentable;
+    product.available = available ?? product.available;
+    product.typeOfOperation = typeOfOperation ?? product.typeOfOperation;
+
+    await product.save();
+    res.json(product);
+
+  }catch (error) {
+    if (error.name === 'ValidationError') {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: 'Failed to update the product', details: error.message });
+    }
+  }
+}
+
+export { getAllListing, createProduct, getIndividualListing, updateIndividualListing };
