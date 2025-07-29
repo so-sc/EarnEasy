@@ -1,7 +1,7 @@
 import express from 'express';
 import authRouter from './authRouter.js';
 import listingRouter from './listingRoutes.js';
-import rentalsRouter from './rentalRoute.js'; 
+import rentalsRouter from './rentalRouter.js'; 
 
 const router = express.Router();
 
