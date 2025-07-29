@@ -1,13 +1,9 @@
-import express from "express";
-import RentalOrder from "../models/rentalOrder.js";
-import { authenticateToken } from "../middleware/authMiddleware.js";
-
-const router = express.Router();
+import RentalOrder from "../models/rentalSchema.js";
 
 const isValidObjectId = (id) => /^[a-f\d]{24}$/i.test(id);
 
-// POST /rentals — Place a rental order (protected)
-router.post("/", authenticateToken, async (req, res) => {
+
+const placeOrder = async (req, res) => {
   const { ownerId, listingId, rentalPeriod, price, returnDueDate } = req.body;
 
   // Input validation
@@ -47,10 +43,10 @@ router.post("/", authenticateToken, async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-});
+};
 
-// GET /rentals — Get all rental orders for the authenticated user (as renter or owner)
-router.get("/", authenticateToken, async (req, res) => {
+
+const getAllOrders = async (req, res) => {
   try {
     const orders = await RentalOrder.find({
       $or: [{ renterId: req.userId }, { ownerId: req.userId }],
@@ -59,10 +55,10 @@ router.get("/", authenticateToken, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
+};
 
-// GET /rentals/:id — Get details of a specific rental order
-router.get("/:id", authenticateToken, async (req, res) => {
+
+const specificOrder = async (req, res) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
     return res.status(400).json({ error: "Invalid order ID" });
@@ -81,10 +77,10 @@ router.get("/:id", authenticateToken, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
+};
 
-// PUT /rentals/:id/status — Update rental status
-router.put("/:id/status", authenticateToken, async (req, res) => {
+
+const updateStatus = async (req, res) => {
   const { status } = req.body;
   const allowedStatuses = [
     "pending",
@@ -119,10 +115,9 @@ router.put("/:id/status", authenticateToken, async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-});
+};
 
-// PUT /rentals/:id/extend — Extend the rental period (optional)
-router.put("/:id/extend", authenticateToken, async (req, res) => {
+const extendPeriod = async (req, res) => {
   const { additionalDays } = req.body;
 
   if (additionalDays === undefined) {
@@ -150,10 +145,9 @@ router.put("/:id/extend", authenticateToken, async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-});
+};
 
-// GET /rentals/active — Get active rentals for the user
-router.get("/active", authenticateToken, async (req, res) => {
+const activeRentals = async (req, res) => {
   try {
     const activeStatuses = ["approved", "ongoing"];
     const orders = await RentalOrder.find({
@@ -166,6 +160,6 @@ router.get("/active", authenticateToken, async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
+};
 
-export default router;
+export {placeOrder, getAllOrders, specificOrder, updateStatus, extendPeriod, activeRentals};
