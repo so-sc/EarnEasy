@@ -82,12 +82,12 @@ const specificOrder = async (req, res) => {
     const order = await RentalOrder.findById(id);
     if (!order) return res.status(404).json({ error: "Order not found" });
     // Optionally, check if user is involved in the order
-    // if (
-    //   order.renterId.toString() !== req.userId &&
-    //   order.ownerId.toString() !== req.userId
-    // ) {
-    //   return res.status(403).json({ error: "Access denied" });
-    // }
+    if (
+      order.renterId.toString() !== req.userId &&
+      order.ownerId.toString() !== req.userId
+    ) {
+      return res.status(403).json({ error: "Access denied" });
+    }
     res.json(order);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -118,12 +118,12 @@ const updateStatus = async (req, res) => {
   try {
     const order = await RentalOrder.findById(req.params.id);
     if (!order) return res.status(404).json({ error: "Order not found" });
-    // if (
-    //   order.renterId.toString() !== req.userId &&
-    //   order.ownerId.toString() !== req.userId
-    // ) {
-    //   return res.status(403).json({ error: "Access denied" });
-    // }
+    if (
+      order.renterId.toString() !== req.userId &&
+      order.ownerId.toString() !== req.userId
+    ) {
+      return res.status(403).json({ error: "Access denied" });
+    }
     order.status = status;
     await order.save();
     res.json(order);
