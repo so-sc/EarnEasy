@@ -58,6 +58,21 @@ const getAllOrders = async (req, res) => {
 };
 
 
+const activeRentals = async (req, res) => {
+  try {
+    const activeStatuses = ["approved", "ongoing"];
+    const orders = await RentalOrder.find({
+      $and: [
+        { $or: [{ renterId: req.userId }, { ownerId: req.userId }] },
+        { status: { $in: activeStatuses } },
+      ],
+    });
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 const specificOrder = async (req, res) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
@@ -144,21 +159,6 @@ const extendPeriod = async (req, res) => {
     res.json(order);
   } catch (err) {
     res.status(400).json({ error: err.message });
-  }
-};
-
-const activeRentals = async (req, res) => {
-  try {
-    const activeStatuses = ["approved", "ongoing"];
-    const orders = await RentalOrder.find({
-      $and: [
-        { $or: [{ renterId: req.userId }, { ownerId: req.userId }] },
-        { status: { $in: activeStatuses } },
-      ],
-    });
-    res.json(orders);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
   }
 };
 
